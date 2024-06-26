@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Select from "react-select";
+import { Navbar, Nav, Container } from "react-bootstrap";
 
 const NavBar: React.FC = () => {
   const options = [
@@ -8,70 +9,39 @@ const NavBar: React.FC = () => {
     { value: "anglais", label: "anglais" },
   ];
 
-  const [Traduction, setTraduction] = React.useState<Traduction>(options[0]);
+  const [traduction, setTraduction] = React.useState(options[0]);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <NavLink className="navbar-brand" to="/">
-        Portfolio
-      </NavLink>
-
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-              to="/"
-              end
-            >
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand as={NavLink} to="/">
+          Portfolio
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={NavLink} to="/" end>
               Home
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-              to="/about"
-            >
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/about">
               About
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-              to="/projects"
-            >
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/projects">
               Projects
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-              to="/resume"
-            >
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/resume">
               Resume
-            </NavLink>
-          </li>
-        </ul>
-      </div>
-      {/* <div>raductions :</div> */}
-      <div className="mx-2">
-        <Select
-          options={options}
-          value={Traduction}
-          onChange={(e: any) => {
-            setTraduction(e);
-          }}
-        />
-      </div>
-    </nav>
+            </Nav.Link>
+          </Nav>
+          <Select
+            options={options}
+            value={traduction}
+            onChange={(e: any) => setTraduction(e)}
+            className="mx-2"
+          />
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
