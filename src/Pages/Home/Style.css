@@ -1,0 +1,11 @@
+/* Home.css */
+/* Home.css */
+
+.home-container {
+  background-image: url("/src/Image/pr.webp"); /* Adjust the path if needed */
+  background-size: cover;
+  background-position: center;
+  height: 95vh;
+  display: flex;
+  overflow: hidden;
+}
