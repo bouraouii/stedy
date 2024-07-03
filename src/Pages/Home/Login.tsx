@@ -28,7 +28,6 @@ function Login() {
   const navigate = useNavigate();
   const handleValidSubmit = (e: any) => {
     e.preventDefault();
-    toast.error("Identifiants incorrects.");
 
     if (login.mail === data.name && login.password === data.password) {
       const jsonString = JSON.stringify(login);

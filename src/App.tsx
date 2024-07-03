@@ -1,7 +1,12 @@
 import React from "react";
 
 import NavBar from "./Pages/Home/NavBar";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
 import About from "./Pages/Home/About";
 import Projects from "./Pages/Home/Projects";
@@ -21,6 +26,7 @@ function App() {
       <NavBar />
 
       <Routes>
+        <Route path="/my-portfolio" element={<Navigate to="/" />} />
         <Route path="/" element={<Login />} />
         <Route path="/Accueil" element={<Accueil />} />
         <Route path="/About" element={<About />} />
