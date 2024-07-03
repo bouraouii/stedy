@@ -10,9 +10,12 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { Password } from "primereact/password";
 import { InputText } from "primereact/inputtext";
 import "./Style.css";
+import Modal from "../../Modal/Modal";
+import ModalComponent from "../../Modal/Modal";
 
 function Login() {
   const [login, setLogin] = useState({ mail: "", password: "" });
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const notifySuccess = () =>
     toast.success("Wow so easy!", {
@@ -72,9 +75,13 @@ function Login() {
               <Button variant="primary" type="submit" className="my-2">
                 Login
               </Button>
-              <li>
-                <Link to="">Enregistrement</Link>
-              </li>
+              <div>
+                <li onClick={() => setIsOpen(true)}>
+                  <Link to="">Enregistrement</Link>
+                </li>
+
+                <ModalComponent isOpen={isOpen} setIsOpen={setIsOpen} />
+              </div>
             </Form.Group>
           </Form>
         </Container>
