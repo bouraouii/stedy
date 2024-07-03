@@ -33,9 +33,7 @@ function Login() {
       const jsonString = JSON.stringify(login);
       localStorage.setItem("login", jsonString);
       navigate("/accueil");
-
       notifySuccess();
-      window.location.reload(); // Force page reload
     } else {
       errorToast("Identifiants incorrects.");
     }
