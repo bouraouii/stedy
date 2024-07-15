@@ -1,13 +1,50 @@
-import { toast } from "react-toastify";
+import { Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./Style.css";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import React from "react";
 
-export default function errorToast(message: string): void {
-  toast.error(message, {
-    className: "responsive-toast",
-    autoClose: 10000,
-    theme: "colored",
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-  });
+export default function errorToast(message: string, type: string): void {
+  switch (type) {
+    case "error":
+      toast.error(message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
+      break;
+    case "success":
+      toast.success(message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
+      break;
+
+    default:
+      toast.info(message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
+      break;
+  }
 }

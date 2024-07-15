@@ -1,32 +1,22 @@
 import React, { useState } from "react";
 import { Container, Form, Button, InputGroup } from "react-bootstrap";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { data } from "../../Constant/data";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import errorToast from "../../Constant/ErrorToast";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { Password } from "primereact/password";
 import { InputText } from "primereact/inputtext";
-import "./Style.css";
-import Modal from "../../Modal/Modal";
+
 import ModalComponent from "../../Modal/Modal";
+
+import "./Style.css";
 
 function Login() {
   const [login, setLogin] = useState({ mail: "", password: "" });
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const notifySuccess = () =>
-    toast.success("Wow so easy!", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      className: "custom-toast-success",
-    });
 
   const navigate = useNavigate();
   const handleValidSubmit = (e: any) => {
@@ -35,10 +25,10 @@ function Login() {
     if (login.mail === data.name && login.password === data.password) {
       const jsonString = JSON.stringify(login);
       localStorage.setItem("login", jsonString);
+
       navigate("/accueil");
-      notifySuccess();
     } else {
-      errorToast("Identifiants incorrects.");
+      errorToast("Identifiants incorrects.", "error");
     }
   };
 
@@ -64,9 +54,9 @@ function Login() {
               <InputGroup>
                 <Password
                   value={login.password}
-                  onChange={(e: any) =>
-                    setLogin({ ...login, password: e.target.value })
-                  }
+                  onChange={(e: any) => {
+                    setLogin({ ...login, password: e.target.value });
+                  }}
                   placeholder="Password"
                   feedback={false}
                   toggleMask
