@@ -1,8 +1,6 @@
 import { Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Style.css";
-import { NavigateFunction, useNavigate } from "react-router-dom";
-import React from "react";
 
 export default function errorToast(message: string, type: string): void {
   switch (type) {

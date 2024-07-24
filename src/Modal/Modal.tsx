@@ -5,7 +5,6 @@ import { Password } from "primereact/password";
 import { InputText } from "primereact/inputtext";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../features/store";
-import { v4 as uuidv4 } from "uuid";
 import { setData } from "../features/dataSlice";
 import { generateUUID } from "../Constant/data";
 
