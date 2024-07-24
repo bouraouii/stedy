@@ -26,9 +26,10 @@ jobs:
       - name: Build
         run: yarn build
 
-       - name: login
-        run: - git config --global user.email "bouraoui99261855@gmail.com"
-             - git config --global user.name "mohamed bouraoui"
+     - name: Configure Git
+        run: |
+          git config --global user.email "bouraoui99261855@gmail.com"
+          git config --global user.name "mohamed bouraoui"
 
       - name: Deploy
         env:

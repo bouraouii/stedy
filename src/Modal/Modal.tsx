@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import "react-toastify/dist/ReactToastify.css";
-import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { Password } from "primereact/password";
 import { InputText } from "primereact/inputtext";
 import { useDispatch, useSelector } from "react-redux";
+
 import { RootState } from "../features/store";
 import { setData } from "../features/dataSlice";
 import { generateUUID } from "../Constant/data";
+
+import "react-toastify/dist/ReactToastify.css";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 type ModalProps = {
   isOpen: boolean;
