@@ -3,6 +3,11 @@ import "react-toastify/dist/ReactToastify.css";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { Password } from "primereact/password";
 import { InputText } from "primereact/inputtext";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../features/store";
+import { v4 as uuidv4 } from "uuid";
+import { setData } from "../features/dataSlice";
+import { generateUUID } from "../Constant/data";
 
 type ModalProps = {
   isOpen: boolean;
@@ -10,11 +15,16 @@ type ModalProps = {
 };
 
 const ModalComponent: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
+  const dispatch = useDispatch();
+  const dataSlice = useSelector((state: RootState) => state.data.data);
+
   const [DataUser, setDataUser] = useState({
     email: "",
     password: "",
     confirmationPassword: "",
   });
+
+  const newUUID = generateUUID();
 
   return (
     <>
@@ -37,7 +47,14 @@ const ModalComponent: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
                   <button
                     type="button"
                     className="btn-close"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      setIsOpen(false);
+                      setDataUser({
+                        email: "",
+                        password: "",
+                        confirmationPassword: "",
+                      });
+                    }}
                     aria-label="Close"
                   ></button>
                 </div>
@@ -48,9 +65,9 @@ const ModalComponent: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
                       className="form-control mb-2"
                       placeholder="Email ou Username"
                       value={DataUser.email}
-                      onChange={(e) =>
-                        setDataUser({ ...DataUser, email: e.target.value })
-                      }
+                      onChange={(e) => {
+                        setDataUser({ ...DataUser, email: e.target.value });
+                      }}
                     />
                   </div>
 
@@ -84,11 +101,31 @@ const ModalComponent: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
                   <button
                     type="button"
                     className="btn btn-secondary"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      setIsOpen(false);
+                      setDataUser({
+                        email: "",
+                        password: "",
+                        confirmationPassword: "",
+                      });
+                    }}
                   >
                     Close
                   </button>
-                  <button type="button" className="btn btn-primary">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() =>
+                      dispatch(
+                        setData({
+                          ...dataSlice,
+                          [newUUID]: {
+                            DataUser,
+                          },
+                        })
+                      )
+                    }
+                  >
                     Save changes
                   </button>
                 </div>
