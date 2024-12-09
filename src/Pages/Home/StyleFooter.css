@@ -1,0 +1,87 @@
+/* Section noire */
+.footer-black {
+  background-color: #000; /* Fond noir */
+  color: #fff; /* Texte blanc */
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.footer-content {
+  width: 100%;
+  max-width: 1200px;
+  display: flex; /* Utilisation de flexbox */
+  align-items: center;
+  justify-content: space-between; /* Espacement entre le contenu */
+  text-align: left; /* Alignement du texte */
+}
+
+.footer-logo img {
+  max-width: 150px;
+  height: auto;
+}
+
+.footer-description {
+  flex: 1; /* Occupe l'espace restant */
+  font-size: 14px;
+  margin: 0 20px;
+}
+
+.footer-linkedin {
+  display: flex;
+  align-items: center;
+}
+
+.footer-linkedin img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+}
+
+.footer-linkedin img:hover {
+  transform: scale(1.1); /* Zoom au survol */
+}
+
+/* Section grise */
+.footer-gray {
+  background-color: #333; /* Fond gris */
+  color: #fff; /* Texte blanc */
+  padding: 15px;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column; /* Les éléments s'empilent en colonne */
+    align-items: center;
+  }
+
+  .footer-description {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .footer-linkedin {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-description {
+    font-size: 12px;
+  }
+
+  .footer-logo img {
+    max-width: 100px;
+  }
+
+  .footer-linkedin img {
+    width: 20px;
+    height: 20px;
+  }
+}

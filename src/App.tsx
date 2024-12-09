@@ -17,23 +17,36 @@ import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import Login from "./Pages/Home/Login";
-import Accueil from "./Pages/Home/Accueil";
+
+import ModalComponent from "./Modal/Modal";
+import Home from "./Pages/Home/Home";
+import Footer from "./Pages/Home/Footerb";
+
+
 
 function App() {
   return (
     <Router>
       <ToastContainer />
       <NavBar />
+      <Login />
+      <ModalComponent/>
+      <Resume/>
+      <ModalComponent/>
+      <About/>
+      <Home/>
+      <Projects />
+      <Footer/>
 
-      <Routes>
-        <Route path="/my-portfolio" element={<Navigate to="/" />} />
+      {/* <Routes>
+        {/* <Route path="/my-portfolio" element={<Navigate to="/Login" />} />
         <Route path="/" element={<Login />} />
         <Route path="/Accueil" element={<Accueil />} />
         <Route path="/About" element={<About />} />
         <Route path="/Projects" element={<Projects />} />
-        <Route path="/Resume" element={<Resume />} />
-      </Routes>
-    </Router>
+        <Route path="/Resume" element={} />
+      </Routes> */}
+    </Router> 
   );
 }
 

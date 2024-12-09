@@ -35,47 +35,29 @@ function Login() {
   return (
     <section>
       <ToastContainer />
-      <Container fluid className="home-section home-container" id="home">
-        <Container className="home-content" style={{ width: "600px" }}>
-          <Form className="login-form" onSubmit={handleValidSubmit}>
-            <Form.Group controlId="formBasicEmail">
-              <InputGroup>
-                <InputText
-                  id="email"
-                  value={login.mail}
-                  onChange={(e: any) =>
-                    setLogin({ ...login, mail: e.target.value })
-                  }
-                  placeholder="Enter email"
-                  className="login-input"
-                  autoComplete="off"
-                />
-              </InputGroup>
-              <InputGroup>
-                <Password
-                  value={login.password}
-                  onChange={(e: any) => {
-                    setLogin({ ...login, password: e.target.value });
-                  }}
-                  placeholder="Password"
-                  feedback={false}
-                  toggleMask
-                />
-              </InputGroup>
-              <Button variant="primary" type="submit" className="my-2">
-                Login
-              </Button>
-              <div>
-                <li onClick={() => setIsOpen(true)}>
-                  <Link to="">Enregistrement</Link>
-                </li>
+      <Container className="home-container text-center" id="home">
+  <div className="row">
+    <div className="col-md-12 text-center">
+      <h1 className="intro-title">
+        ESN
+        <br />
+        Next Generation
+      </h1>
+      <p className="intro-desc mb-0 mb-sm-5">
+        StedY repense le métier de conseil en technologies et services
+        numériques <br />
+        pour délivrer plus de valeur, de transparence et d’engagement
+        <br />
+        à ses consultants comme à ses clients entreprises.
+      </p>
+    </div>
+    <div className="d-block d-sm-none text-center my-4">
+     
+    </div>
+  </div>
+  
+</Container>
 
-                <ModalComponent isOpen={isOpen} setIsOpen={setIsOpen} />
-              </div>
-            </Form.Group>
-          </Form>
-        </Container>
-      </Container>
     </section>
   );
 }

@@ -1,0 +1,107 @@
+/* Main Container for Cards */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allows wrapping of cards */
+    padding: 20px;
+    gap: 1rem; /* Space between cards */
+    margin: 20px;
+    background-color: rgba(226, 233, 233, 0.856);
+  }
+  
+  /* Wrapper for Multiple Cards */
+  .custom-card-wrapper {
+    display: flex;
+    gap: 1rem; /* Space between cards */
+    flex-wrap: wrap; /* Wrap cards to the next line if needed */
+  }
+  
+  /* Individual Card Styles */
+  .custom-card {
+    flex: 1 1 calc(50% - 1rem); /* Responsive: 50% width minus gap */
+    max-width: 400px;
+    border: none;
+    border-radius: 20px 0px 0px 20px; /* Custom corner radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px;
+    background: #fff; /* Card background color */
+    position: relative; /* Required for ::before and ::after */
+    overflow: hidden; /* Ensures gradient borders don't overflow */
+  }
+  
+  /* Gradient for the Top Border */
+  .custom-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px; /* Height of the gradient */
+    background: linear-gradient(to right, #1abc9c, #1abc9c); /* Solid gradient */
+  }
+  
+  /* Gradient for the Bottom Border */
+  .custom-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px; /* Height of the gradient */
+    background: linear-gradient(to right, #1abc9c, #1abc9c); /* Solid gradient */
+  }
+  
+  /* Card Title */
+  .card-title {
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #000;
+    text-align: left;
+  }
+  
+  /* Card Sections */
+  .card-section {
+    margin-bottom: 20px;
+  }
+  
+  /* Section Titles */
+  .section-title {
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    color: #000;
+    position: relative;
+    padding-left: 20px; /* Space for the square icon */
+  }
+  
+  /* Small turquoise square before section titles */
+  .section-title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    background-color: #4dd0e1; /* Turquoise color */
+    border-radius: 2px;
+  }
+  
+  /* Section Text */
+  .section-text {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    color: #333;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+  
+  /* Responsive Design for Smaller Screens */
+  @media (max-width: 768px) {
+    .custom-card {
+      flex: 1 1 100%; /* Full width on smaller screens */
+    }
+  }
+  
