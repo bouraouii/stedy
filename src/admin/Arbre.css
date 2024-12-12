@@ -1,0 +1,51 @@
+/* TreeView.css */
+
+.tree-container {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .tree-node {
+    margin-left: 20px;
+    position: relative;
+  }
+  
+  .tree-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 4px 0;
+  }
+  
+  .tree-header:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .tree-toggler {
+    margin-right: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #007bff;
+  }
+  
+  .tree-key {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .tree-leaf {
+    color: #666;
+    margin-left: 16px;
+  }
+  
+  .tree-children {
+    margin-left: 20px;
+    border-left: 1px dashed #ccc;
+    padding-left: 10px;
+  }
+  
+  .expanded .tree-toggler {
+    color: #0056b3;
+  }
+  

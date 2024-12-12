@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardBody, CardTitle, Button, Container, Row, Col } from "reactstrap";
 
 
-function About() {
+function Header2() {
 
   const scrollToContactForm = () => {
     const element = document.getElementById("contact-form");
@@ -94,4 +94,4 @@ function About() {
   
 }
 
-export default About;
+export default Header2;

@@ -1,52 +1,90 @@
-import React from "react";
-
-import NavBar from "./Pages/Home/NavBar";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
-
-import About from "./Pages/Home/About";
-import Projects from "./Pages/Home/Projects";
-import Resume from "./Pages/Home/Resume";
+import React, { ReactNode } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
+import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
+
+import NavBar from "./Pages/Home/NavBar";
+import Header from "./Pages/Home/Header";
+import CardHeader from "./Card/Card";
+import Header1 from "./Pages/Home/Header1";
+import Header2 from "./Pages/Home/Header2";
+import ScrollToTopHeader from "./Pages/Home/ScrollToTopHeader";
+import FormulaireHeader from "./Pages/Home/FormulaireHeader";
+import Footer from "./Pages/Home/Footerb";
 import Login from "./Pages/Home/Login";
 
-import ModalComponent from "./Modal/Modal";
-import Home from "./Pages/Home/Home";
-import Footer from "./Pages/Home/Footerb";
-
-
+import SaidBar from "./admin/SaidBar";
+import UpdateCard from "./admin/UpdateCard";
+import AllRequests from "./admin/AllRequests";
 
 function App() {
   return (
     <Router>
       <ToastContainer />
-      <NavBar />
-      <Login />
-      <ModalComponent/>
-      <Resume/>
-      <ModalComponent/>
-      <About/>
-      <Home/>
-      <Projects />
-      <Footer/>
+      <Routes>
+        {/* Main Layout */}
+        <Route
+          path="/"
+          element={
+            <MainLayout>
+              <NavBar />
+              <Header />
+              <CardHeader />
+              <Header1 />
+              <Header2 />
+              <ScrollToTopHeader />
+              <FormulaireHeader />
+              <Footer />
+            </MainLayout>
+          }
+        />
+        <Route path="/Login" element={<Login />} />
 
-      {/* <Routes>
-        {/* <Route path="/my-portfolio" element={<Navigate to="/Login" />} />
-        <Route path="/" element={<Login />} />
-        <Route path="/Accueil" element={<Accueil />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/Projects" element={<Projects />} />
-        <Route path="/Resume" element={} />
-      </Routes> */}
-    </Router> 
+        {/* Admin Layout */}
+        <Route
+          path="/saidBar"
+          element={
+            <AdminLayout>
+              <SaidBar />
+            </AdminLayout>
+          }
+        />
+        <Route
+          path="/UpdateCard"
+          element={
+            <AdminLayout>
+              <UpdateCard />
+            </AdminLayout>
+          }
+        />
+        <Route
+          path="/AllRequests"
+          element={
+            <AdminLayout>
+              <AllRequests />
+            </AdminLayout>
+          }
+        />
+      </Routes>
+    </Router>
+  );
+}
+
+// Layout for main pages
+function MainLayout({ children }: { children: ReactNode }) {
+  return <>{children}</>;
+}
+
+// Layout for admin pages
+function AdminLayout({ children }: { children: ReactNode }) {
+  return (
+    <div className="admin-layout d-flex">
+      <SaidBar />
+      <main className="admin-content flex-grow-1 p-3">{children}</main>
+    </div>
   );
 }
 

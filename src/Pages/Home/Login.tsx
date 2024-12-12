@@ -1,65 +1,114 @@
 import React, { useState } from "react";
-import { Container, Form, Button, InputGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Card, CardBody, CardTitle, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
-import { data } from "../../Constant/data";
+import errorToast from "../../Constant/ErrorToast";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import errorToast from "../../Constant/ErrorToast";
-import "primereact/resources/themes/lara-light-cyan/theme.css";
-import { Password } from "primereact/password";
-import { InputText } from "primereact/inputtext";
 
-import ModalComponent from "../../Modal/Modal";
 
-import "./Style.css";
+export default function Login() {
 
-function Login() {
-  const [login, setLogin] = useState({ mail: "", password: "" });
-  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const navigate = useNavigate();
-  const handleValidSubmit = (e: any) => {
-    e.preventDefault();
+  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [error, setError] = useState("");
+  const jsonString = JSON.stringify(formData);
+ 
 
-    if (login.mail === data.name && login.password === data.password) {
-      const jsonString = JSON.stringify(login);
-      localStorage.setItem("login", jsonString);
+  const handleInputChange = (e:any) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-      navigate("/accueil");
-    } else {
-      errorToast("Identifiants incorrects.", "error");
+  const handleSubmit = (e:any) => {
+    e.preventDefault(); // Empêche le rechargement de la page par défaut
+    setError(""); // Réinitialise les erreurs
+
+    // Validation simple (par exemple : tous les champs doivent être remplis)
+    if (!formData.username || !formData.password) {
+      setError("Both fields are required!");
+    
+      
+      return;
     }
+        
+    if (formData.username === "test"&&formData.password==="test") {
+        localStorage.setItem("login", jsonString);
+        return navigate("/saidBar")
+      }
+
+  console.log("fdffdfddf");
+  console.log("fdffdfddf");
+    errorToast("Identifiants incorrects.", "error");
+    
+    // Insérer votre logique ici (par exemple : envoyer les données à une API)
   };
 
   return (
     <section>
-      <ToastContainer />
-      <Container className="home-container text-center" id="home">
-  <div className="row">
-    <div className="col-md-12 text-center">
-      <h1 className="intro-title">
-        ESN
-        <br />
-        Next Generation
-      </h1>
-      <p className="intro-desc mb-0 mb-sm-5">
-        StedY repense le métier de conseil en technologies et services
-        numériques <br />
-        pour délivrer plus de valeur, de transparence et d’engagement
-        <br />
-        à ses consultants comme à ses clients entreprises.
-      </p>
+    <ToastContainer />
+    <div
+      style={{
+        height: "100vh", // Full page height
+        display: "flex",
+        justifyContent: "center", // Center horizontally
+        alignItems: "center", // Center vertically
+        backgroundColor: "#f8f9fa", // Light background
+      }}
+    >
+      <Card
+        style={{
+          width: "22rem",
+          borderRadius: "10px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <CardBody>
+          <CardTitle tag="h4" className="text-center mb-4">
+            Login
+          </CardTitle>
+          <Form onSubmit={handleSubmit}>
+            {error && (
+              <div className="alert alert-danger text-center" role="alert">
+                {error}
+              </div>
+            )}
+            <FormGroup>
+              <Label for="username">Username</Label>
+              <Input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter your username"
+                value={formData.username}
+                onChange={handleInputChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="password">Password</Label>
+              <Input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleInputChange}
+                required
+              />
+            </FormGroup>
+            <Button type="submit" color="primary" block>
+              Login
+            </Button>
+          </Form>
+        </CardBody>
+           <Button  color="" onClick={()=> navigate("/")} >
+              back
+            </Button>
+      </Card>
     </div>
-    <div className="d-block d-sm-none text-center my-4">
-     
-    </div>
-  </div>
-  
-</Container>
-
     </section>
   );
 }
 
-export default Login;

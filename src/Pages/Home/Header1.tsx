@@ -2,7 +2,7 @@ import React from "react";
 import myImage from "../../Image/rpo999.svg"; // Assuming the image is correctly located in the 'Image' folder
 import "./RPOSection.css";
 
-const RPOSection = () => {
+const Header1 = () => {
   return (
     <div className="rpo-container">
       {/* Text Section */}
@@ -41,4 +41,4 @@ const RPOSection = () => {
   );
 };
 
-export default RPOSection;
+export default Header1;

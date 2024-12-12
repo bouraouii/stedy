@@ -3,13 +3,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface Item {
-  email: string;
-  password: string;
-  confirmationPassword: string;
+ title:string
+ content:string
+ subTitle:string
 }
 
 export interface DataState {
-  data: Record<string, Item>;
+  data: Record<number, {}>;
 }
 
 const initialState: DataState = {

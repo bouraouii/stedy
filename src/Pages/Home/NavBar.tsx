@@ -32,11 +32,26 @@ const NavBar: React.FC = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
 
-          <Nav className="ms-auto"> {/* ms-auto pousse l'élément à droite */}
-            <button className="btn btn-primary my-2 " onClick={scrollToContactForm} style={{width:"25vh", }}>
+          <Nav className="ms-auto "> {/* ms-auto pousse l'élément à droite */}
+            <button className="btn btn-primary my-2 mx-2 " onClick={scrollToContactForm} style={{width:"25vh", }}>
               Contactez-nous
             </button>
+            <button className="btn btn-primary my-2 mx-2 " 
+            onClick={()=>{
+
+              if(login.password==="test" && login.username==="test"){
+               navigate("/saidBar")
+              }else{
+                 navigate("/login");
+              }
+              
+            }} 
+            style={{width:"25vh", }}>
+             {login.password==="test" && login.username==="test"? "Access Website Admin":"Login"}
+            </button>
           </Nav>
+         
+         
         </Navbar.Collapse>
       </Container>
     </Navbar>

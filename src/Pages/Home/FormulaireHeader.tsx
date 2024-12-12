@@ -12,7 +12,11 @@ import Image from "../../Image/addrese.svg"
 
 
 
-const ContactPage = () => {
+const FormulaireHeader = () => {
+
+
+
+  
   return (
     <Container id="contact-form" className="contact-page mt-5">
       <Row>
@@ -74,8 +78,8 @@ const ContactPage = () => {
           contact@stedy.io
         </p>
         <p>
-          <i className="fas fa-map-marker-alt" style={{ color: '#007bff', marginRight: '10px' }}></i>
-          <FontAwesomeIcon icon={faLocationDot} className="blue-icon mx-2"  style={{color:"blue"}}/>
+          <i className="fas fa-map-marker-alt" style={{ color: '#007bff', marginRight: '11px' }}></i>
+          <FontAwesomeIcon icon={faLocationDot} className="blue-icon mx-1"  style={{color:"blue"}}/>
           10 Place de la Joliette, 13002 Marseille
         </p>
       </div>
@@ -136,4 +140,4 @@ const ContactPage = () => {
   );
 };
 
-export default ContactPage;
+export default FormulaireHeader;

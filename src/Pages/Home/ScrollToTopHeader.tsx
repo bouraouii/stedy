@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Home = () => {
+const ScrollToTopHeader = () => {
   // État pour savoir si le bouton doit être visible
   const [isVisible, setIsVisible] = useState(false);
 
@@ -57,4 +57,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default ScrollToTopHeader;

@@ -9,7 +9,7 @@ import "./CustomCard.css";
 
 
 
-function ModalComponent() {
+function CardHeader() {
   return (
    <div className="card-container">
   <div className="custom-card-wrapper">
@@ -73,4 +73,4 @@ function ModalComponent() {
   );
 };
 
-export default ModalComponent;
+export default CardHeader;

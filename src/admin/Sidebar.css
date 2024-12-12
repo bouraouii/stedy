@@ -1,0 +1,140 @@
+/* Sidebar - Affichage par défaut */
+.sidebar {
+    height: 100vh; /* Prend toute la hauteur de l'écran */
+    width: 250px; /* Largeur par défaut */
+    background-color: #000; /* Fond noir */
+    color: #fff; /* Texte blanc */
+    position: fixed; /* Sidebar fixe */
+    top: 0;
+    left: 0; /* Toujours visible sur PC */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Collapsed Sidebar (Mobile) */
+  .sidebar.collapsed {
+    transform: translateX(-100%); /* Cache la sidebar */
+  }
+  
+  /* Titre et menu */
+  .sidebar-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar-menu li {
+    margin: 15px 0;
+  }
+  
+  .sidebar-menu a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+  
+  .sidebar-menu a:hover {
+    color: #1db954; /* Couleur au survol */
+  }
+  
+  /* Hamburger Button */
+  .hamburger {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #000;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1100;
+    cursor: pointer;
+    display: none; /* Caché sur PC */
+  }
+  
+  .hamburger:hover {
+    color: #1db954;
+  }
+  
+  /* Overlay */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 900;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 9000px) {
+    .sidebar {
+      transform: translateX(-100%); /* Sidebar cachée par défaut sur mobile */
+    }
+  
+    .sidebar.open {
+      transform: translateX(0); /* Sidebar visible sur mobile */
+    }
+  
+    .hamburger {
+      display: block; /* Bouton hamburger visible sur mobile */
+    }
+  }
+ /* Conteneur principal */
+.update-card-container {
+    display: flex; /* Utilisation de Flexbox */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: flex-start; /* Aligner au top (haut de la page) */
+    height: 100%; /* Hauteur de la fenêtre pour un centrage vertical complet */
+    padding-top: 20px; /* Ajoute un espace au top */
+  }
+  
+  /* Style optionnel pour l'input */
+  #message {
+    width: 70%; /* Ajuste la largeur de l'input */
+    max-width: 600px; /* Limiter la largeur maximale */
+    padding: 10px;
+  }
+  .mx-2 {
+    margin-right: 0.5rem !important;
+    margin-left: 1.5rem !important;
+}
+.cursor-pointer {
+    cursor: pointer; /* Change le curseur à une main lors du survol */
+  }
+  .cursor-pointer:hover {
+    fill: #007bff;
+    
+     /* Change la couleur de l'icône lors du survol */
+  }
+  
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px); /* Add hover effect */
+  }
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px); /* Add hover effect */
+  }
+
+  
+  
