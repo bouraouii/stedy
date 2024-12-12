@@ -70,7 +70,7 @@ const ModalUpdate: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
                       className="my-2"
                       style={{ width: "300px" }}
                     >
-                    Are you sure to confirm?
+                    Are you sure to confirm ?
                     </div>
                   
                   
