@@ -197,112 +197,179 @@ export const splitTextIntoLines = (
   return chunks;
 };
 export const structureData1 = {
-  1: {
-    title:
-      "StedY repense le métier de conseil en technologies et services numériques pour délivrer plus de valeur, de transparence et d’engagement à ses consultants comme à ses clients entreprises.",
+  text:{
+    1: {
+      title:
+        "StedY repense le métier de conseil en technologies et services numériques pour délivrer plus de valeur, de transparence et d’engagement à ses consultants comme à ses clients entreprises.",
+        subTitle: [
+          {  tilte: "ESN" },
+          {  title: "Next Generation" },
+         
+        ],
+    },
+    2: {
+      title: "Talents",
+      sections: [
+        {
+          title: "Rémunération optimisée",
+          content:
+            "Afin de rendre la part qui vous revient, nous pratiquons un des taux de commissionnement les plus bas du marché",
+        },
+        {
+          title: "Choix dans vos missions",
+          content:
+            "Nos Talents Manager vous proposerons l’intégralité des missions de nos clients. Vous pourrez alors vous positionner sur celles qui vous ressemblent, selon vos compétences et vos attentes.",
+        },
+        {
+          title: "Autonomie et gestion de carrière",
+          content:
+            "Bénéficiez d’un accompagnement personnalisé lorsque vous êtes prêt à embrasser le statut d’indépendant.",
+        },
+      ],
+    },
+    3: {
+      title: "Talents55",
+      sections: [
+        {
+          title: "Rémunération optimiséeee",
+          content:
+            "Afin de rendre la part qui vous revient, nous pratiquons un des taux de commissionnement les plus bas du marché",
+        },
+        {
+          title: "Choix dans vos missions",
+          content:
+            "Nos Talents Manager vous proposerons l’intégralité des missions de nos clients. Vous pourrez alors vous positionner sur celles qui vous ressemblent, selon vos compétences et vos attentes.",
+        },
+        {
+          title: "Autonomie et gestion de carrière",
+          content:
+            "Bénéficiez d’un accompagnement personnalisé lorsque vous êtes prêt à embrasser le statut d’indépendant.",
+        },
+      ],
+    },
+    4: {
+      title: "StedY c’est aussi du RPO",
+      subTitle: "Le RPO by StedY, c’est quoi ?",
+      content:
+        "Le RPO (Recruitment Process Outsourcing) vous permet de disposer rapidement de l’expertise d’un StedYer, un RH spécialiste du sourcing et de l'engagement des profils tech et numérique, quand le besoin s’en fait sentir. Immédiatement opérationnel, rompu aux stratégies d'approche de ces talents rares et recherchés, il vous aide à atteindre plus rapidement vos objectifs de recrutement tout en éliminant les risques liés à l'embauche d'une nouvelle ressource.",
+      subContent:
+        "* Un expert RH à l’expérience 'confirmée' (5 ans) et disposant des mêmes outils que ceux de nos équipes représente un coût global annuel d’environ 100 K€.",
+    },
+    5: {
+      title: "Talents2",
+      sections: [
+        {
+          title: "Rémunération optimisée55",
+          content:
+            "Afin de rendre la part qui vous revient, nous pratiquons un des taux de commissionnement les plus bas du marché",
+        },
+        {
+          title: "Choix dans vos missions",
+          content:
+            "Nos Talents Manager vous proposerons l’intégralité des missions de nos clients. Vous pourrez alors vous positionner sur celles qui vous ressemblent, selon vos compétences et vos attentes.",
+        },
+        {
+          title: "Autonomie et gestion de carrière",
+          content:
+            "Bénéficiez d’un accompagnement personnalisé lorsque vous êtes prêt à embrasser le statut d’indépendant.",
+        },
+      ],
+    },
+    6: {
+      title: "Talents210",
+      sections: [
+        {
+          title: "Rémunération optimisée55",
+          content:
+            "Afin de rendre la part qui vous revient, nous pratiquons un des taux de commissionnement les plus bas du marché",
+        },
+        {
+          title: "Choix dans vos missions",
+          content:
+            "Nos Talents Manager vous proposerons l’intégralité des missions de nos clients. Vous pourrez alors vous positionner sur celles qui vous ressemblent, selon vos compétences et vos attentes.",
+        },
+        {
+          title: "Autonomie et gestion de carrière",
+          content:
+            "Bénéficiez d’un accompagnement personnalisé lorsque vous êtes prêt à embrasser le statut d’indépendant.",
+        },
+      ],
+    },
+    7: {
+      title: "L’offre RPO by StedY",
+      content: "Une relation simple, une prestation complète",
+      subSections: [
+        {
+          title: "Un interlocuteur unique, responsable de la prestation",
+        },
+        {
+          title: "Un chef de projet, responsable du pilotage stratégique",
+        },
+        {
+          title:
+            "L’ensemble des outils RH fournis (Job Boards, LinkedIn Recruiter, ATS, Reports, …)",
+        },
+      ],
+    },
+    8: {
+      title: "Sourcing Specialist",
+      subTitle: "Off site",
+      sections: [
+        { title: "Sourcing" },
+        { title: "Qualifications à distance" },
+        { title: "Gestion de la relation avec le business et les RH" },
+      ],
+    },
+    9: {
+      title: "Talent Acquisition Specialist",
+      subTitle: "On site",
+      sections: [
+        { title: "Sourcing" },
+        { title: "Qualifications à distance" },
+        { title: "Gestion de la relation avec le business et les RH" },
+      ],
+    },
+    10: {
+      title: "Durée de la prestation",
+      options: [
+        {
+          title: "Déterminée",
+          subTitle:
+            "Prestation de 1 ou plusieurs mois avec date de fin, renouvelable.",
+        },
+        {
+          title: "Indéterminée",
+          subTitle: "Avec préavis de fin de 1 mois.",
+        },
+      ],
+    },
+    11: {
+     
+      contactInfo: [
+        {  tilte: "0498555555" },
+        {  title: "contact@gmail.com" },
+        {  title: "10 place de la Joutehh" },
+      ],
+    },
   },
-  2: {
-    title: "Talents",
-    sections: [
-      {
-        title: "Rémunération optimisée",
-        content:
-          "Afin de rendre la part qui vous revient, nous pratiquons un des taux de commissionnement les plus bas du marché",
-      },
-      {
-        title: "Choix dans vos missions",
-        content:
-          "Nos Talents Manager vous proposerons l’intégralité des missions de nos clients. Vous pourrez alors vous positionner sur celles qui vous ressemblent, selon vos compétences et vos attentes.",
-      },
-      {
-        title: "Autonomie et gestion de carrière",
-        content:
-          "Bénéficiez d’un accompagnement personnalisé lorsque vous êtes prêt à embrasser le statut d’indépendant.",
-      },
-    ],
-  },
-  3: {
-    title: "StedY c’est aussi du RPO",
-    subTitle: "Le RPO by StedY, c’est quoi ?",
-    content:
-      "Le RPO (Recruitment Process Outsourcing) vous permet de disposer rapidement de l’expertise d’un StedYer, un RH spécialiste du sourcing et de l'engagement des profils tech et numérique, quand le besoin s’en fait sentir. Immédiatement opérationnel, rompu aux stratégies d'approche de ces talents rares et recherchés, il vous aide à atteindre plus rapidement vos objectifs de recrutement tout en éliminant les risques liés à l'embauche d'une nouvelle ressource.",
-    subContent:
-      "* Un expert RH à l’expérience 'confirmée' (5 ans) et disposant des mêmes outils que ceux de nos équipes représente un coût global annuel d’environ 100 K€.",
-  },
-  4: {
-    title: "Talents2",
-    sections: [
-      {
-        title: "Rémunération optimisée55",
-        content:
-          "Afin de rendre la part qui vous revient, nous pratiquons un des taux de commissionnement les plus bas du marché",
-      },
-      {
-        title: "Choix dans vos missions",
-        content:
-          "Nos Talents Manager vous proposerons l’intégralité des missions de nos clients. Vous pourrez alors vous positionner sur celles qui vous ressemblent, selon vos compétences et vos attentes.",
-      },
-      {
-        title: "Autonomie et gestion de carrière",
-        content:
-          "Bénéficiez d’un accompagnement personnalisé lorsque vous êtes prêt à embrasser le statut d’indépendant.",
-      },
-    ],
-  },
-  5: {
-    title: "L’offre RPO by StedY",
-    content: "Une relation simple, une prestation complète",
-    subSections: [
-      {
-        title: "Un interlocuteur unique, responsable de la prestation",
-      },
-      {
-        title: "Un chef de projet, responsable du pilotage stratégique",
-      },
-      {
-        title:
-          "L’ensemble des outils RH fournis (Job Boards, LinkedIn Recruiter, ATS, Reports, …)",
-      },
-    ],
-  },
-  6: {
-    title: "Sourcing Specialist",
-    subTitle: "Off site",
-    sections: [
-      { title: "Sourcing" },
-      { title: "Qualifications à distance" },
-      { title: "Gestion de la relation avec le business et les RH" },
-    ],
-  },
-  7: {
-    title: "Talent Acquisition Specialist",
-    subTitle: "On site",
-    sections: [
-      { title: "Sourcing" },
-      { title: "Qualifications à distance" },
-      { title: "Gestion de la relation avec le business et les RH" },
-    ],
-  },
-  8: {
-    title: "Durée de la prestation",
-    options: [
-      {
-        title: "Déterminée",
-        subTitle:
-          "Prestation de 1 ou plusieurs mois avec date de fin, renouvelable.",
-      },
-      {
-        title: "Indéterminée",
-        subTitle: "Avec préavis de fin de 1 mois.",
-      },
-    ],
-  },
-  9: {
-    title: "Contact",
-    contactInfo: [
-      { type: "Phone", value: "0498555555" },
-      { type: "Email", value: "contact@gmail.com" },
-      { type: "Address", value: "10 place de la Joutehh" },
-    ],
+  Formulair: {
+    1: {
+      Object: "pro",
+      Name: "mohamed",
+      pénome: "bouraoui",
+      Email: "moahed@gamil.com",
+      Télephone: "2999999",
+      EntrePrise: "RBK",
+      Message: "bonjoure je souis mohamed bouraoui ",
+    },
+    2:{
+      Object: "protet",
+      Name: "ali",
+      pénome: "bouraoui",
+      Email: "ali@gamil.com",
+      Télephone: "2999999",
+      EntrePrise: "RBK",
+      Message: "bonjour",
+    }
   },
 };

@@ -1,5 +1,10 @@
 import React, { ReactNode } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -19,10 +24,47 @@ import Login from "./Pages/Home/Login";
 import SaidBar from "./admin/SaidBar";
 import UpdateCard from "./admin/UpdateCard";
 import AllRequests from "./admin/AllRequests";
+import errorToast from "./Constant/ErrorToast";
+import { decryptage } from "./Constant/Cryptage";
+import SubCard from "./Card/SubCard";
 
 function App() {
   return (
     <Router>
+      <AppRoutes />
+    </Router>
+  );
+}
+
+function AppRoutes() {
+  const user = decryptage(localStorage.getItem("user") || "{}");
+  const [dataDB, setDataDB] = React.useState<any>({});
+
+  const navigate = useNavigate();
+
+  const path = window.location.pathname;
+
+  React.useEffect(() => {
+    const checkLoginAndRedirect = async () => {
+      // Vérifie si login est vide, null ou non défini
+      if (!user || user.length === 0) {
+        if (path !== "/" && path !== "/login" && path !== "/Login") {
+          // Affiche un message d'erreur via le toast
+
+          navigate("/login");
+          // Attente avant de rediriger
+          await new Promise((resolve) => setTimeout(resolve, 2000)); // Attendre 1.5 secondes
+          errorToast("They will answer you for registration first", "error");
+          // Redirige vers la page de login après avoir affiché l'erreur
+        }
+      }
+    };
+
+    checkLoginAndRedirect();
+  }, [user, path, navigate]);
+
+  return (
+    <>
       <ToastContainer />
       <Routes>
         {/* Main Layout */}
@@ -34,6 +76,7 @@ function App() {
               <Header />
               <CardHeader />
               <Header1 />
+              <SubCard/>
               <Header2 />
               <ScrollToTopHeader />
               <FormulaireHeader />
@@ -41,7 +84,7 @@ function App() {
             </MainLayout>
           }
         />
-        <Route path="/Login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
 
         {/* Admin Layout */}
         <Route
@@ -69,7 +112,7 @@ function App() {
           }
         />
       </Routes>
-    </Router>
+    </>
   );
 }
 

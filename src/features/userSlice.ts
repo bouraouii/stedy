@@ -1,29 +1,28 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface clinet {
+export interface admin {
   email: string;
   password: string;
-  confirmationPassword: string;
 }
 
 export interface DataState {
-  test: Record<string, clinet>;
+  admin: Record<string, admin>;
 }
 
 const initialState: DataState = {
-  test: {},
+  admin: {},
 };
 
-const test = createSlice({
-  name: "test",
+const admin = createSlice({
+  name: "admin",
   initialState,
   reducers: {
-    setClinet: (state, action: PayloadAction<{}>) => {
-      state.test = action.payload;
+    setAdmin: (state, action: PayloadAction<{}>) => {
+      state.admin = action.payload;
     },
   },
 });
 
-export const { setClinet } = test.actions;
+export const { setAdmin } = admin.actions;
 
-export default test.reducer;
+export default admin.reducer;

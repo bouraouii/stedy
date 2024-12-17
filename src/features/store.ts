@@ -2,20 +2,21 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import dataReducer from "./dataSlice";
-import testReducer from "./userSlice"
+import adminReducer from "./userSlice"
 
-import storage from "redux-persist/lib/storage";
+import storageSession from 'redux-persist/lib/storage/session'; // Pour sessionStorage
+
 import { persistReducer, persistStore } from "redux-persist";
 import { combineReducers } from "@reduxjs/toolkit";
 
 const persistConfig = {
   key: "root",
-  storage,
+  storage:storageSession
 };
 
 const rootReducer = combineReducers({
   data: dataReducer,
-  user:testReducer
+  admin:adminReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

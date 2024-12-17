@@ -1,16 +1,15 @@
 // CustomCard.tsx
-import React from "react";
 import { CardBody } from "reactstrap";
 import "./CustomCard.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../features/store";
 
-function CardHeader() {
+function SubCard() {
   const dataSlice: any = useSelector((state: RootState) => state.data.data);
 
   return (
     <div className="cards-container">
-      {[dataSlice[2], dataSlice[3]].map((card, cardIndex) => (
+      {[dataSlice[5], dataSlice[6]].map((card, cardIndex) => (
         <div key={cardIndex} className="custom-card">
           <CardBody>
             <h3 className="card-title ">{card?.title}</h3>
@@ -27,4 +26,4 @@ function CardHeader() {
   );
 }
 
-export default CardHeader;
+export default SubCard;

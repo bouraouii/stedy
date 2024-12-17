@@ -1,107 +1,122 @@
-/* Main Container for Cards */
-.card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap; /* Allows wrapping of cards */
-    padding: 20px;
-    gap: 1rem; /* Space between cards */
-    margin: 20px;
-    background-color: rgba(226, 233, 233, 0.856);
-  }
-  
-  /* Wrapper for Multiple Cards */
-  .custom-card-wrapper {
-    display: flex;
-    gap: 1rem; /* Space between cards */
-    flex-wrap: wrap; /* Wrap cards to the next line if needed */
-  }
-  
-  /* Individual Card Styles */
+/* Container Principal des Cartes */
+.cards-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap; /* Les cartes passent à la ligne si nécessaire */
+  gap: 1.5rem; /* Espacement entre les cartes */
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 100%;
+  background-color: #f3f1f1;
+  /* Limite la largeur sur les écrans larges */
+}
+
+/* Carte Individuelle */
+.custom-card {
+  flex: 1 1 calc(33.333% - 2rem); /* 3 cartes par ligne sur PC */
+  max-width: 400px; /* Largeur maximale pour chaque carte */
+  min-width: 280px; /* Largeur minimale pour éviter le rétrécissement excessif */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative; /* Nécessaire pour les ::before et ::after */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;/* Animation au survol */
+}
+
+/* Gradient pour la Bordure Supérieure */
+.custom-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px; /* Hauteur de la bordure dégradée */
+  background: linear-gradient(to right, #1abc9c, #1abc9c); /* Couleur unie */
+}
+
+/* Gradient pour la Bordure Inférieure */
+.custom-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px; /* Hauteur de la bordure dégradée */
+  background: linear-gradient(to right, #1abc9c, #1abc9c); /* Couleur unie */
+}
+
+/* Animation au Survol */
+.custom-card:hover {
+  transform: translateY(-5px); /* Effet d'élévation */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+}
+
+/* Titre Principal */
+.card-title {
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 1rem;
+}
+
+/* Sections des cartes */
+.card-section {
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 15px;
+}
+
+/* Petit carré turquoise avant chaque titre de section */
+.section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  background-color: #4dd0e1;
+  border-radius: 2px;
+}
+
+.section-text {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Responsive pour Tablette */
+@media (max-width: 1024px) {
   .custom-card {
-    flex: 1 1 calc(50% - 1rem); /* Responsive: 50% width minus gap */
-    max-width: 400px;
-    border: none;
-    border-radius: 20px 0px 0px 20px; /* Custom corner radius */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    padding: 20px;
-    background: #fff; /* Card background color */
-    position: relative; /* Required for ::before and ::after */
-    overflow: hidden; /* Ensures gradient borders don't overflow */
+    flex: 1 1 calc(50% - 1.5rem); /* 2 cartes par ligne */
   }
-  
-  /* Gradient for the Top Border */
-  .custom-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px; /* Height of the gradient */
-    background: linear-gradient(to right, #1abc9c, #1abc9c); /* Solid gradient */
+}
+
+/* Responsive pour Mobile */
+@media (max-width: 768px) {
+  .custom-card {
+    flex: 1 1 100%; /* Une seule carte par ligne */
+    padding: 15px;
   }
-  
-  /* Gradient for the Bottom Border */
-  .custom-card::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 5px; /* Height of the gradient */
-    background: linear-gradient(to right, #1abc9c, #1abc9c); /* Solid gradient */
-  }
-  
-  /* Card Title */
+
   .card-title {
-    font-family: "Roboto", sans-serif;
-    font-weight: bold;
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #000;
-    text-align: left;
+    font-size: 20px;
   }
-  
-  /* Card Sections */
-  .card-section {
-    margin-bottom: 20px;
-  }
-  
-  /* Section Titles */
+
   .section-title {
-    font-family: "Roboto", sans-serif;
-    font-weight: bold;
-    font-size: 18px;
-    color: #000;
-    position: relative;
-    padding-left: 20px; /* Space for the square icon */
+    font-size: 16px;
   }
-  
-  /* Small turquoise square before section titles */
-  .section-title::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 5px;
-    width: 10px;
-    height: 10px;
-    background-color: #4dd0e1; /* Turquoise color */
-    border-radius: 2px;
-  }
-  
-  /* Section Text */
+
   .section-text {
-    font-family: "Roboto", sans-serif;
-    font-size: 14px;
-    color: #333;
-    margin-top: 10px;
-    line-height: 1.5;
+    font-size: 13px;
   }
-  
-  /* Responsive Design for Smaller Screens */
-  @media (max-width: 768px) {
-    .custom-card {
-      flex: 1 1 100%; /* Full width on smaller screens */
-    }
-  }
-  
+}

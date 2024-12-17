@@ -1,32 +1,24 @@
 import React from "react";
 import myImage from "../../Image/rpo999.svg"; // Assuming the image is correctly located in the 'Image' folder
 import "./RPOSection.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../../features/store";
+
 
 const Header1 = () => {
+  const dataSlice: any = useSelector((state: RootState) => state.data.data);
+ 
+
   return (
     <div className="rpo-container">
       {/* Text Section */}
       <div className="rpo-text">
-        <h2>StedY c'est aussi du RPO</h2>
-        <h3>Le RPO by StedY, c'est quoi ?</h3>
+        <h2> {dataSlice[4].title}</h2>
+        <h3>{dataSlice[4].subTitle}</h3>
+        <p>{dataSlice[4].content}</p>
+        <p>{dataSlice[4].MetaContent}</p>
         <p>
-          Le RPO (Recruitment Process Outsourcing) vous permet de disposer
-          rapidement de l’expertise d'un StedYer, un RH spécialiste du sourcing
-          et de l’engagement des profils tech et numérique, quand le besoin
-          s’en fait sentir.
-        </p>
-        <p>
-          Immédiatement opérationnel, rompu aux stratégies d’approche de ces
-          talents rares et recherchés, il vous aide à atteindre plus
-          rapidement vos objectifs de recrutement tout en éliminant les risques
-          liés à l’embauche d'une nouvelle ressource.
-        </p>
-        <p>
-          <em>
-            * Un expert RH à l’expérience “confirmée” (5 ans) et disposant des
-            mêmes outils que ceux de nos équipes représente un coût global
-            annuel d’environ 100 K€.
-          </em>
+          <em>{dataSlice[4].subContent}</em>
         </p>
       </div>
 

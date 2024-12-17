@@ -8,13 +8,14 @@ interface TreeNode {
 }
 
 interface TreeViewProps {
-  data: TreeNode;
+  treeData: TreeNode;
+  setTreeData:Function
   depth?: number; // Optional: Controls the indentation for nested levels
 }
 
-const AppTest: React.FC<TreeViewProps> = ({ data, depth = 0 }) => {
+const AppTest: React.FC<TreeViewProps> = ({ treeData, depth = 0  , setTreeData}) => {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
-  const [treeData, setTreeData] = useState<TreeNode>(data);
+ 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [currentKey, setCurrentKey] = useState<string>('');
   const [currentValue, setCurrentValue] = useState<string>('');
@@ -24,7 +25,7 @@ const AppTest: React.FC<TreeViewProps> = ({ data, depth = 0 }) => {
   };
 
   const handleValueChange = (key: string, newValue: any) => {
-    setTreeData((prevData) => {
+    setTreeData((prevData:any) => {
       const updatedData = { ...prevData };
       const keys = key.split('-');
 

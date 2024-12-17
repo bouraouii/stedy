@@ -1,121 +1,68 @@
-import React, { useState } from "react";
-import { Password } from "primereact/password";
-import { InputText } from "primereact/inputtext";
-import { useDispatch, useSelector } from "react-redux";
-import { Input } from "reactstrap";
-
-import { RootState } from "../features/store";
-import { setData } from "../features/dataSlice";
-import { generateUUID, structureData } from "../Constant/data";
+import React from "react";
+import axios from "axios";
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 import myImage from "../Image/logo13.svg";
-
-import "react-toastify/dist/ReactToastify.css";
-import "primereact/resources/themes/lara-light-cyan/theme.css";
+import errorToast from "../Constant/ErrorToast";
+import { setData } from "../features/dataSlice";
+import { useDispatch } from "react-redux";
 
 type ModalProps = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
- 
-};
-type DataUserType = {
-  [key: string]: string; // Allow dynamic string-based access
+  treeData: any; // Remplacez `any` par un type spécifique si possible
 };
 
-const ModalUpdate: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
+const ModalUpdate: React.FC<ModalProps> = ({ isOpen, setIsOpen, treeData }) => {
+  // Fonction pour basculer l'ouverture/fermeture du modal
+  const toggle = () => setIsOpen(!isOpen);
+
+  // Soumission des données au backend
 
 
-  
-  const dispatch = useDispatch();
-  const dataSlice = useSelector((state: RootState) => state.data.data);
+  const dispatch =useDispatch()
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/postTree",
+        treeData
+      );
 
-  const [DataUser, setDataUser] = useState("")
-  
-
-
-  const newUUID = generateUUID();
+      if (response.data.error) {
+        errorToast(response.data.message, "error");
+        console.error(`Erreur: ${response.data.message}`);
+      } else {
+       // errorToast("Les modifications ont été enregistrées avec succès.", "success");
+         dispatch(setData(structuredClone(treeData)))
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      errorToast("Une erreur est survenue, veuillez réessayer.", "error");
+    } finally {
+      toggle(); // Fermer le modal après traitement
+    }
+  };
 
   return (
-    <>
-      {isOpen && (
-        <>
-          <div
-            className="modal fade show"
-            tabIndex={-1}
-            style={{ display: "block" }}
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-            role="dialog"
-          >
-            <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title" id="exampleModalLabel">
-                    <img src={myImage} alt="Description de l'image" />
-                  </h5>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    onClick={() => {
-                      setIsOpen(false);
-                      setDataUser("");
-                    }}
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div className="modal-body row">
-                 
-                    <div
-                     
-                      className="my-2"
-                      style={{ width: "300px" }}
-                    >
-                    Are you sure to confirm ?
-                    </div>
-                  
-                  
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() => {
-                      setIsOpen(false);
-                      setDataUser("");
-                    }}
-                  >
-                    Close
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => {
-                      dispatch(
-                        setData({
-                          ...structureData,
-                          1: {
-                            ...structureData[1],
-                            title: DataUser, // Modifiez uniquement cette propriété
-                          },
-                        })
-                      );
-                      
-                      setIsOpen(false);
-                      setDataUser("")
-                    }}
-                  >
-                    Save changes
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-         
-
-          <div className="modal-backdrop fade show "></div>
-        </>
-      )}
-    </>
+    <Modal isOpen={isOpen} toggle={toggle} centered>
+      <ModalHeader toggle={toggle}>
+        <img src={myImage} alt="Logo" style={{ width: "30px", marginRight: "10px" }} />
+        Confirmation
+      </ModalHeader>
+      <ModalBody>
+        <p>Are you sure you want to confirm the changes?</p>
+      </ModalBody>
+      <ModalFooter>
+        <Button color="secondary" onClick={toggle}>
+          Close
+        </Button>
+        <Button color="primary" onClick={handleSubmit}>
+          Save changes
+        </Button>
+      </ModalFooter>
+    
+    </Modal>
   );
 };
 

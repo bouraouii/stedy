@@ -13,7 +13,7 @@ export interface DataState {
 }
 
 const initialState: DataState = {
-  data: {},
+  data: {}
 };
 
 const dataSlice = createSlice({
