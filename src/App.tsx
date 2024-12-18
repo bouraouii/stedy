@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { Dispatch, ReactNode, SetStateAction } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -27,6 +27,10 @@ import AllRequests from "./admin/AllRequests";
 import errorToast from "./Constant/ErrorToast";
 import { decryptage } from "./Constant/Cryptage";
 import SubCard from "./Card/SubCard";
+import { useSelector } from "react-redux";
+import { RootState } from "./features/store";
+import ModalUpdate from "./admin/UpdateCard";
+
 
 function App() {
   return (
@@ -62,7 +66,8 @@ function AppRoutes() {
 
     checkLoginAndRedirect();
   }, [user, path, navigate]);
-
+  const [testing , setTesting]=React.useState<boolean>(false)
+ 
   return (
     <>
       <ToastContainer />
@@ -72,16 +77,24 @@ function AppRoutes() {
           path="/"
           element={
             <MainLayout>
-              <NavBar />
-              <Header />
-              <CardHeader />
-              <Header1 />
-              <SubCard/>
-              <Header2 />
-              <ScrollToTopHeader />
-              <FormulaireHeader />
-              <Footer />
-            </MainLayout>
+           <NavBar setTesting={setTesting} />
+            {testing? (
+              <>
+               
+                <Header />
+                <CardHeader />
+                <Header1 />
+                <SubCard />
+                <Header2 />
+                <ScrollToTopHeader />
+                <FormulaireHeader /> 
+                 <Footer />
+              </>
+            ) : (
+              <h1 className="text-center">No data available. Please refresh the page or check the data.</h1>
+            )}
+          
+          </MainLayout>
           }
         />
         <Route path="/login" element={<Login />} />

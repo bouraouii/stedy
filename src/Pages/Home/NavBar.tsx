@@ -9,12 +9,27 @@ import { setData } from "../../features/dataSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../features/store";
 
+type typeing={
 
-const NavBar: React.FC = () => {
-  const user = decryptage(localStorage.getItem("user") || "{}");
-  const password = decryptage(localStorage.getItem("password") || "{}");
+  setTesting: React.Dispatch<React.SetStateAction<boolean>>; 
+}
 
-  
+
+
+const NavBar: React.FC<typeing> = ({setTesting}) => {
+  let user = "";
+  let password = "";
+
+  try {
+    const encryptedUser = localStorage.getItem("user") || "{}";
+    const encryptedPassword = localStorage.getItem("password") || "{}";
+
+    // Ajout d'une vérification et d'une gestion des erreurs
+    user = decryptage(encryptedUser);
+    password = decryptage(encryptedPassword);
+  } catch (error) {
+    console.error("Erreur lors du décryptage des données : ", error);
+  }
 
   const scrollToContactForm = () => {
     const element = document.getElementById("contact-form");
@@ -22,9 +37,8 @@ const NavBar: React.FC = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-  const dispatch = useDispatch();
 
-  //const dispatch = useDispatch<AppDispatch>();  // Assurez-vous que dispatch est bien typé
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const dataSlice = useSelector((state: RootState) => state.data.data);
@@ -34,14 +48,19 @@ const NavBar: React.FC = () => {
       const response = await fetch("http://localhost:5000/api/v1/getTreeAdmin");
       const data = await response.json();
 
-      // Assurez-vous que l'objet data a la bonne structure avant de le dispatcher
-      dispatch(setData(data.text)); // Envoi des données dans Redux via setData
+      if (data && data.text) {
+        dispatch(setData(data.text)); // Envoi des données dans Redux via setData
+      }
     } catch (error) {
       console.error("Erreur lors de la récupération des données :", error);
     }
   };
+
   if (Object.keys(dataSlice).length === 0) {
+   
     fetchData();
+  }else{
+    setTesting(true)
   }
 
   return (
