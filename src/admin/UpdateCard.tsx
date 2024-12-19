@@ -29,7 +29,7 @@ export default function UpdateCard() {
     const fetchCategories = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/v1/getTreeAdmin"
+          "https://backandstedy-29.onrender.com/api/v1/getTreeAdmin"
         );
 
         // Vérifiez si la réponse est OK

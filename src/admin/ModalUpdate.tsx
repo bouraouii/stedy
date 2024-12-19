@@ -25,7 +25,7 @@ const ModalUpdate: React.FC<ModalProps> = ({ isOpen, setIsOpen, treeData }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/postTree",
+        "https://backandstedy-29.onrender.com/api/v1/postTree",
         treeData
       );
 

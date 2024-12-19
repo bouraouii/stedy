@@ -23,7 +23,7 @@ export default function AllRequests() {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/Request"
+          "https://backandstedy-29.onrender.com/api/v1/Request"
         );
 
         // No need to use JSON.parse, axios handles it automatically

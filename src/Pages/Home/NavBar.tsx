@@ -45,7 +45,7 @@ const NavBar: React.FC<typeing> = ({setTesting}) => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/v1/getTreeAdmin");
+      const response = await fetch("https://backandstedy-29.onrender.com/api/v1/getTreeAdmin");
       const data = await response.json();
 
       if (data && data.text) {
