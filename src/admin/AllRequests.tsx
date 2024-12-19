@@ -25,9 +25,13 @@ export default function AllRequests() {
         const response = await axios.get(
           "https://backandstedy-29.onrender.com/api/v1/Request"
         );
-
+        console.log(response.data.formulair);
         // No need to use JSON.parse, axios handles it automatically
-        setRequest(JSON.parse(response.data)); // Assuming response.data is already an array of categories
+        setRequest(response.data.formulair); 
+       
+         
+        
+        // Assuming response.data is already an array of categories
 
         // Log the fetched data
       } catch (error: any) {

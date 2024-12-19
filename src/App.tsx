@@ -42,64 +42,53 @@ function App() {
 
 function AppRoutes() {
   const user = decryptage(localStorage.getItem("user") || "{}");
-  const [dataDB, setDataDB] = React.useState<any>({});
-
   const navigate = useNavigate();
-
   const path = window.location.pathname;
+  const [testing, setTesting] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     const checkLoginAndRedirect = async () => {
-      // Vérifie si login est vide, null ou non défini
       if (!user || user.length === 0) {
-        if (path !== "/" && path !== "/login" && path !== "/Login") {
-          // Affiche un message d'erreur via le toast
-
+        if (path !== "/" && path !== "/login") {
           navigate("/login");
-          // Attente avant de rediriger
-          await new Promise((resolve) => setTimeout(resolve, 2000)); // Attendre 1.5 secondes
-          errorToast("They will answer you for registration first", "error");
-          // Redirige vers la page de login après avoir affiché l'erreur
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          errorToast("Please log in to access this page.", "error");
         }
       }
     };
 
     checkLoginAndRedirect();
   }, [user, path, navigate]);
-  const [testing , setTesting]=React.useState<boolean>(false)
- 
+
   return (
     <>
       <ToastContainer />
       <Routes>
-        {/* Main Layout */}
         <Route
           path="/"
           element={
             <MainLayout>
-           <NavBar setTesting={setTesting} />
-            {testing? (
-              <>
-               
-                <Header />
-                <CardHeader />
-                <Header1 />
-                <SubCard />
-                <Header2 />
-                <ScrollToTopHeader />
-                <FormulaireHeader /> 
-                 <Footer />
-              </>
-            ) : (
-              <h1 className="text-center">No data available. Please refresh the page or check the data.</h1>
-            )}
-          
-          </MainLayout>
+              <NavBar setTesting={setTesting} />
+              {testing ? (
+                <>
+                  <Header />
+                  <CardHeader />
+                  <Header1 />
+                  <SubCard />
+                  <Header2 />
+                  <ScrollToTopHeader />
+                  <FormulaireHeader />
+                  <Footer />
+                </>
+              ) : (
+                <h1 className="text-center">
+                  No data available. Please refresh the page or check the data.
+                </h1>
+              )}
+            </MainLayout>
           }
         />
         <Route path="/login" element={<Login />} />
-
-        {/* Admin Layout */}
         <Route
           path="/saidBar"
           element={
@@ -124,10 +113,13 @@ function AppRoutes() {
             </AdminLayout>
           }
         />
+        {/* Route 404 */}
+        <Route path="*" element={<h1>404 - Page not found</h1>} />
       </Routes>
     </>
   );
 }
+
 
 // Layout for main pages
 function MainLayout({ children }: { children: ReactNode }) {
