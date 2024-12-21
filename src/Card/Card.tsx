@@ -13,7 +13,7 @@ function CardHeader() {
       {[dataSlice[2], dataSlice[3]].map((card, cardIndex) => (
         <div key={cardIndex} className="custom-card">
           <CardBody>
-            <h3 className="card-title ">{card?.title}</h3>
+            <h3 className="card-title my-2 ">{card?.title}</h3>
             {card.sections.map((section: any, sectionIndex: any) => (
               <div key={sectionIndex} className="card-section">
                 <h5 className="section-title">{section?.title}</h5>

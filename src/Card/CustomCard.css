@@ -2,7 +2,7 @@
 .cards-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  
   flex-wrap: wrap; /* Les cartes passent à la ligne si nécessaire */
   gap: 1.5rem; /* Espacement entre les cartes */
   padding: 20px;
@@ -15,8 +15,8 @@
 /* Carte Individuelle */
 .custom-card {
   flex: 1 1 calc(33.333% - 2rem); /* 3 cartes par ligne sur PC */
-  max-width: 400px; /* Largeur maximale pour chaque carte */
-  min-width: 280px; /* Largeur minimale pour éviter le rétrécissement excessif */
+  /* Largeur maximale pour chaque carte */
+  /* Largeur minimale pour éviter le rétrécissement excessif */
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -24,6 +24,7 @@
   position: relative; /* Nécessaire pour les ::before et ::after */
   transition: transform 0.3s ease, box-shadow 0.3s ease;/* Animation au survol */
 }
+
 
 /* Gradient pour la Bordure Supérieure */
 .custom-card::before {
@@ -75,6 +76,25 @@
   position: relative;
   padding-left: 15px;
 }
+.section-Sutitle {
+  font-size: 18px;
+ 
+  color: #333;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 15px;
+}
+.section-Sutitle::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  background-color: #4dd0e1;
+  border-radius: 2px;
+}
+
 
 /* Petit carré turquoise avant chaque titre de section */
 .section-title::before {

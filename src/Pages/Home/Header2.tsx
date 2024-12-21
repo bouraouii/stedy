@@ -33,7 +33,7 @@ function Header2() {
         {/* Colonne de gauche : Texte */}
         <Col
           md="6"
-          className="d-flex flex-column justify-content-center mb-5 mb-md-0"
+          className="d-flex flex-column justify-content-start mb-5 mb-md-0"
         >
           <h1 className="mb-4">{dataSlice[7].title}</h1>
           <p className="text-muted">{dataSlice[7].content}</p>
@@ -69,7 +69,7 @@ function Header2() {
             {/* Carte 1 */}
             <Card
               className="shadow-sm border-primary"
-              style={{ flex: "1", minWidth: "300px", maxWidth: "300px" }}
+              style={{ flex: "1", minWidth: "300px", maxWidth: "300px", height: "fit-content" }}
             >
               <div className="bg-primary text-white text-center py-3 rounded-top">
                 <CardTitle tag="h5" className="mb-0">
@@ -93,7 +93,8 @@ function Header2() {
             {/* Carte 2 */}
             <Card
               className="shadow-sm border-primary"
-              style={{ flex: "1", minWidth: "300px", maxWidth: "300px" }}
+              style={{ flex: "1", minWidth: "300px", maxWidth: "300px", height: "auto" }}
+
             >
               <div className="bg-primary text-white text-center py-3 rounded-top">
                 <CardTitle tag="h5" className="mb-0">

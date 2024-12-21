@@ -215,12 +215,12 @@ const FormulaireHeader = () => {
               <img
                 src={myImage}
                 alt="Description de l'image"
-                className="mx-3"
+                className="mx-2"
               />
              {dataSlice[11].contactInfo[0].tilte}
             </p>
             <p>
-              <img src={Image} alt="Description de l'image" className="mx-3" />
+              <img src={Image} alt="Description de l'image" className="mx-2" />
               {dataSlice[11].contactInfo[1].title}
             </p>
             <p>
