@@ -30,6 +30,7 @@ import SubCard from "./Card/SubCard";
 import { useSelector } from "react-redux";
 import { RootState } from "./features/store";
 import ModalUpdate from "./admin/UpdateCard";
+import Loading from "./Constant/Loading";
 
 
 function App() {
@@ -68,7 +69,7 @@ function AppRoutes() {
           path="/"
           element={
             <MainLayout>
-              <NavBar setTesting={setTesting} />
+              <NavBar setTesting={setTesting}  testing={testing}/>
               {testing ? (
                 <>
                   <Header />
@@ -82,7 +83,8 @@ function AppRoutes() {
                 </>
               ) : (
                 <h1 className="text-center">
-                  No data available. Please refresh the page or check the data.
+                 < Loading/>
+                 
                 </h1>
               )}
             </MainLayout>

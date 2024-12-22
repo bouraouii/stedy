@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Button, Input } from "reactstrap"; // Assurez-vous que vous avez importé Input correctement, selon la bibliothèque
+import { Button, Input } from "reactstrap";
 import myImage from "../Image/iconUpdate.svg";
 
 import "./Sidebar.css";
 import ModalUpdate from "./ModalUpdate";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setData } from "../features/dataSlice";
 import { structureData1 } from "../Constant/data";
 import AppTest from "./Arbre";
@@ -14,17 +14,43 @@ interface TreeNode {
 }
 
 export default function UpdateCard() {
-  const [isOpen, setIsOpen] = React.useState<boolean>(false);
-
-  const [nomberHeader, setNomberHeader] = React.useState("0");
-
-  //const dataSlice:any = useSelector((state: RootState) => state.data.data);
-  //console.log("dataslice",dataSlice);
-
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [treeData, setTreeData] = useState<TreeNode>(structureData1.text);
-
-  //const dataSlice = useSelector((state: RootState) => state.data.data);
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<string[]>([]);
   const dispatch = useDispatch();
+
+  // Fonction de recherche récursive
+  const searchInData = (treeData: any, keyword: string): string[] => {
+    const matches: string[] = [];
+    for (const key in treeData) {
+      const value = treeData[key];
+      if (
+        typeof value === "string" &&
+        value.toLowerCase().includes(keyword.toLowerCase())
+      ) {
+        matches.push(key);
+      } else if (typeof value === "object" && value !== null) {
+        const nestedMatches = searchInData(value, keyword);
+        if (nestedMatches.length > 0) {
+          matches.push(key);
+        }
+      }
+    }
+    return matches;
+  };
+
+  const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newQuery = e.target.value;
+    setQuery(newQuery);
+    if (newQuery.trim() === "") {
+      setResults([]);
+      return;
+    }
+    const found = searchInData(treeData, newQuery);
+    setResults(found);
+  };
+
   React.useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -32,113 +58,123 @@ export default function UpdateCard() {
           "https://backandstedy-29.onrender.com/api/v1/getTreeAdmin"
         );
 
-        // Vérifiez si la réponse est OK
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        // Obtenez la réponse brute pour la vérifier
         const rawData = await response.text();
-
-        // Essayez de parser les données en JSON
         const data = JSON.parse(rawData);
-        console.log("med", data);
 
-        console.log(Object.keys(data.text).length);
-        
-        if(Object.keys(data.text).length !==0) {
-          setTreeData(data.text)
+        if (Object.keys(data.text).length !== 0) {
+          setTreeData(data.text);
         }
-       
-        // Parse manuellement en JSON
-         dispatch(setData(structuredClone(data.text)))
+        dispatch(setData(structuredClone(data.text)));
       } catch (error) {
         console.error("Error fetching or parsing data:", error);
       }
     };
 
     fetchCategories();
-  }, []);
+  }, [dispatch]);
 
   return (
-    <div>
-      {/* <div
-        className="update-card-container "
+    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+      {/* Barre de recherche */}
+      <div
         style={{
-          borderBottom: "2px solid #ccc", // Ligne en bas
-          paddingBottom: "10px", // Optionnel pour espacer la ligne du contenu
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "center",
+          gap: "10px",
+          marginBottom: "20px",
         }}
       >
-        <span
-          className="mx-2 cursor-pointer "
-          onClick={() => {
-            setIsOpen(true);
-            setNomberHeader("1");
-          }}
-        >
-          <img src={myImage} alt="Description de l'image" />
-        </span>
         <Input
-          type="textarea"
-          name="message"
-          id="message"
-          value={structureData[1].title}
-          placeholder="Votre message"
-          rows="4" // Nombre de lignes visibles
+          type="text"
+          placeholder="Search..."
+          value={query}
+          onChange={handleQueryChange}
           style={{
-            width: "70%",
-            resize: "vertical", // Permet de redimensionner verticalement
             padding: "10px",
-            fontSize: "16px",
-            boxSizing: "border-box", // Inclure padding dans largeur
-            overflow: "auto", // Permettre le défilement si nécessaire
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+            width: "300px",
+            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
           }}
-          disabled
         />
       </div>
+
+      {/* Résultats */}
+      <div style={{ marginBottom: "20px" }}>
+        {results.length > 0 ? (
+          <ul style={{ listStyle: "none", padding: 0 }}>
+            {results.map((result, index) => (
+              <li
+                key={index}
+                style={{
+                  padding: "10px",
+                  backgroundColor: "#f9f9f9",
+                  marginBottom: "5px",
+                  borderRadius: "5px",
+                  boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.1)",
+                }}
+              >
+                Index: {result}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          query && <p>No results found.</p>
+        )}
+      </div>
+
+      {/* Data Tree View */}
       <div
-        className="update-card-container"
         style={{
-          borderBottom: "2px solid #ccc", // Ligne en bas
-          paddingBottom: "10px", // Optionnel pour espacer la ligne du contenu
+          borderBottom: "2px solid #ccc",
+          paddingBottom: "10px",
+          marginBottom: "20px",
         }}
       >
-        <span
-          className="mx-2 cursor-pointer "
-          onClick={() => {
-            setIsOpen(true);
-          }}
-        >
-          <img src={myImage} alt="Description de l'image" />
-        </span>
-        <UpdatecardHeader
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          setNomberHeader={setNomberHeader}
-        />
-      </div> */}
-      <div
-        className="update-card-container"
-        style={{
-          borderBottom: "2px solid #ccc", // Ligne en bas
-          paddingBottom: "10px", // Optionnel pour espacer la ligne du contenu
-        }}
-      >
-        <h1>Tree View</h1>
+        <h2 style={{ fontSize: "20px", color: "#333" }}>Data Tree View</h2>
         <AppTest treeData={treeData} setTreeData={setTreeData} />
       </div>
-      <div className="update-card-container">
+
+      {/* Actions */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: "10px",
+        }}
+      >
         <Button
-          color="primary my-2 mx-2"
+          color="primary"
+          style={{ padding: "10px 20px", borderRadius: "5px" }}
           onClick={() => {
             setIsOpen(true);
           }}
         >
           Save
-        </Button>{" "}
-        <Button color="secondary my-2 mx-2">return to initial state</Button>
+        </Button>
+
+        <Button
+          color="secondary"
+          style={{ padding: "10px 20px", borderRadius: "5px" }}
+        >
+          Reset to Initial State
+        </Button>
       </div>
-     { isOpen && <ModalUpdate isOpen={isOpen} setIsOpen={setIsOpen} treeData={treeData} />}
+
+      {/* Modal */}
+      {isOpen && (
+        <ModalUpdate
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          treeData={treeData}
+        />
+      )}
     </div>
   );
 }

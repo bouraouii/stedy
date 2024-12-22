@@ -9,14 +9,12 @@ import { setData } from "../../features/dataSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../features/store";
 
-type typeing={
+type typeing = {
+  setTesting: React.Dispatch<React.SetStateAction<boolean>>;
+  testing: boolean;
+};
 
-  setTesting: React.Dispatch<React.SetStateAction<boolean>>; 
-}
-
-
-
-const NavBar: React.FC<typeing> = ({setTesting}) => {
+const NavBar: React.FC<typeing> = ({ setTesting, testing }) => {
   let user = "";
   let password = "";
 
@@ -45,7 +43,9 @@ const NavBar: React.FC<typeing> = ({setTesting}) => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("https://backandstedy-29.onrender.com/api/v1/getTreeAdmin");
+      const response = await fetch(
+        "https://backandstedy-29.onrender.com/api/v1/getTreeAdmin"
+      );
       const data = await response.json();
 
       if (data && data.text) {
@@ -57,49 +57,50 @@ const NavBar: React.FC<typeing> = ({setTesting}) => {
   };
 
   if (Object.keys(dataSlice).length === 0) {
-   
     fetchData();
-  }else{
-    setTesting(true)
+  } else {
+    setTesting(true);
   }
 
   return (
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand as={NavLink} to="/accueil">
-          <img src={myImage} alt="Description de l'image" />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto ">
-            {" "}
-            {/* ms-auto pousse l'élément à droite */}
-            <button
-              className="btn btn-primary my-2 mx-2 "
-              onClick={scrollToContactForm}
-              style={{ width: "25vh" }}
-            >
-              Contactez-nous
-            </button>
-            <button
-              className="btn btn-primary my-2 mx-2 "
-              onClick={() => {
-                if (password === "test" && user === "test") {
-                  navigate("/saidBar");
-                } else {
-                  navigate("/login");
-                }
-              }}
-              style={{ width: "25vh" }}
-            >
-              {password === "test" && user === "test"
-                ? "Access Website Admin"
-                : "Login"}
-            </button>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <>
+      {testing && (
+        <Navbar bg="light" expand="lg">
+          <Container>
+            <Navbar.Brand as={NavLink} to="/accueil">
+              <img src={myImage} alt="Description de l'image" />
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="ms-auto">
+                {/* Bouton Contactez-nous */}
+                <button
+                  className="btn btn-primary my-2 mx-2"
+                  onClick={scrollToContactForm}
+                  style={{ width: "25vh" }}
+                >
+                  Contactez-nous
+                </button>
+                {/* Bouton Login / Admin */}
+                <button
+                  className="btn btn-primary my-2 mx-2"
+                  onClick={() =>
+                    password === "test" && user === "test"
+                      ? navigate("/saidBar")
+                      : navigate("/login")
+                  }
+                  style={{ width: "25vh" }}
+                >
+                  {password === "test" && user === "test"
+                    ? "Access Website Admin"
+                    : "Login"}
+                </button>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+      )}
+    </>
   );
 };
 
