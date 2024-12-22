@@ -253,9 +253,7 @@ export const structureData1 = {
     "5": {
       "title": "Les contextes propices au RPO",
       "sections": [
-        {
-          "content": "Afin de rendre la part qui vous revient, nous pratiquons un des taux de commissionnement les plus bas du marché"
-        },
+       
         {
           "content": "Compenser un manque de process RH et/ou de ressources expérimentées en interne"
         },

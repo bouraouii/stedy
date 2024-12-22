@@ -11,6 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Sidebar.css"; // Assuming you have custom styles in this file
 import { structureData1 } from "../Constant/data";
 import axios from "axios";
+import Loading from "../Constant/Loading";
 
 export default function AllRequests() {
   const [request, setRequest] = useState([]);
@@ -46,16 +47,18 @@ export default function AllRequests() {
   }, []);
  
   
-  return (
-    <div className="">
+  return request.length === 0 ? (
+    <Loading />
+  ) : (
+    <div className="request-container">
       <Row className="justify-content-center" style={{ marginTop: "20px" }}>
         {Object.values(request).map((el: any, index: number) => (
           <Col xs="11" sm="8" md="6" lg="4" key={index}>
             <Card
               style={{
-                width: "100%", // La carte remplit l'espace disponible
-                border: "2px solid blue", // Bordure bleue pour chaque carte
-                borderRadius: "10px",
+                width: "100%", // La carte remplit toute la largeur disponible
+                border: "2px solid blue", // Bordure bleue
+                borderRadius: "10px", // Coins arrondis
                 marginBottom: "20px", // Espacement entre les cartes
               }}
             >
@@ -66,8 +69,8 @@ export default function AllRequests() {
                 {Object.entries(el).map(
                   ([key, value]: [string, any], idx: number) => (
                     <ListGroupItem key={idx}>
-                      <h4>{key}</h4>
-                      {value}
+                      <h4 style={{ fontSize: "16px", color: "#333" }}>{key}</h4>
+                      <p style={{ margin: 0 }}>{value}</p>
                     </ListGroupItem>
                   )
                 )}
@@ -78,4 +81,5 @@ export default function AllRequests() {
       </Row>
     </div>
   );
+  
 }

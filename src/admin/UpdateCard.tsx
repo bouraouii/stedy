@@ -6,8 +6,9 @@ import "./Sidebar.css";
 import ModalUpdate from "./ModalUpdate";
 import { useDispatch } from "react-redux";
 import { setData } from "../features/dataSlice";
-import { structureData1 } from "../Constant/data";
+
 import AppTest from "./Arbre";
+import Loading from "../Constant/Loading";
 
 interface TreeNode {
   [key: string]: any;
@@ -15,7 +16,7 @@ interface TreeNode {
 
 export default function UpdateCard() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [treeData, setTreeData] = useState<TreeNode>(structureData1.text);
+  const [treeData, setTreeData] = useState<TreeNode>({});
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<string[]>([]);
   const dispatch = useDispatch();
@@ -78,103 +79,110 @@ export default function UpdateCard() {
   }, [dispatch]);
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      {/* Barre de recherche */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          gap: "10px",
-          marginBottom: "20px",
-        }}
-      >
-        <Input
-          type="text"
-          placeholder="Search..."
-          value={query}
-          onChange={handleQueryChange}
+    Object.keys(treeData).length === 0 ? (
+      <Loading />
+    ) : (
+      <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+        {/* Barre de recherche */}
+        <div
           style={{
-            padding: "10px",
-            border: "1px solid #ccc",
-            borderRadius: "5px",
-            width: "300px",
-            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            gap: "10px",
+            marginBottom: "20px",
           }}
-        />
-      </div>
-
-      {/* Résultats */}
-      <div style={{ marginBottom: "20px" }}>
-        {results.length > 0 ? (
-          <ul style={{ listStyle: "none", padding: 0 }}>
-            {results.map((result, index) => (
-              <li
-                key={index}
-                style={{
-                  padding: "10px",
-                  backgroundColor: "#f9f9f9",
-                  marginBottom: "5px",
-                  borderRadius: "5px",
-                  boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.1)",
-                }}
-              >
-                Index: {result}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          query && <p>No results found.</p>
+        >
+          <Input
+            type="text"
+            placeholder="Search..."
+            value={query}
+            onChange={handleQueryChange}
+            style={{
+              padding: "10px",
+              border: "1px solid #ccc",
+              borderRadius: "5px",
+              width: "300px",
+              boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+            }}
+          />
+        </div>
+  
+        {/* Résultats */}
+        <div style={{ marginBottom: "20px" }}>
+          {results.length > 0 ? (
+            <ul style={{ listStyle: "none", padding: 0 }}>
+              {results.map((result, index) => (
+                <li
+                  key={index}
+                  style={{
+                    padding: "10px",
+                    backgroundColor: "#f9f9f9",
+                    marginBottom: "5px",
+                    borderRadius: "5px",
+                    boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.1)",
+                  }}
+                >
+                  Index: {result}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            query && <p>No results found.</p>
+          )}
+        </div>
+  
+        {/* Vue en arborescence */}
+        <div
+          style={{
+            borderBottom: "2px solid #ccc",
+            paddingBottom: "10px",
+            marginBottom: "20px",
+          }}
+        >
+          <h2 style={{ fontSize: "20px", color: "#333" }}>Data Tree View</h2>
+          <AppTest treeData={treeData} setTreeData={setTreeData} />
+        </div>
+  
+        {/* Actions */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: "10px",
+          }}
+        >
+          <Button
+            color="primary"
+            style={{ padding: "10px 20px", borderRadius: "5px" }}
+            onClick={() => setIsOpen(true)}
+          >
+            Save
+          </Button>
+  
+          <Button
+            color="secondary"
+            style={{ padding: "10px 20px", borderRadius: "5px" }}
+            onClick={() => {
+              // Remettre à l'état initial
+              setTreeData({});
+            }}
+          >
+            Reset to Initial State
+          </Button>
+        </div>
+  
+        {/* Modal */}
+        {isOpen && (
+          <ModalUpdate
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            treeData={treeData}
+          />
         )}
       </div>
-
-      {/* Data Tree View */}
-      <div
-        style={{
-          borderBottom: "2px solid #ccc",
-          paddingBottom: "10px",
-          marginBottom: "20px",
-        }}
-      >
-        <h2 style={{ fontSize: "20px", color: "#333" }}>Data Tree View</h2>
-        <AppTest treeData={treeData} setTreeData={setTreeData} />
-      </div>
-
-      {/* Actions */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          gap: "10px",
-        }}
-      >
-        <Button
-          color="primary"
-          style={{ padding: "10px 20px", borderRadius: "5px" }}
-          onClick={() => {
-            setIsOpen(true);
-          }}
-        >
-          Save
-        </Button>
-
-        <Button
-          color="secondary"
-          style={{ padding: "10px 20px", borderRadius: "5px" }}
-        >
-          Reset to Initial State
-        </Button>
-      </div>
-
-      {/* Modal */}
-      {isOpen && (
-        <ModalUpdate
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          treeData={treeData}
-        />
-      )}
-    </div>
+    )
   );
+  
 }
